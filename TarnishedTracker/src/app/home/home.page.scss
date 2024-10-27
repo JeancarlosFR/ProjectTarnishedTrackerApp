@@ -27,11 +27,13 @@
 
 
 .card-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding: 16px;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 20px;
+  margin-top: 30px;
+  margin-bottom: 10px;
 }
 
 ion-card {
@@ -62,6 +64,7 @@ mat-divider{
   max-width: 150px;
   height: auto;
   padding: 10px;
+  margin-bottom: 100px;
 }
 
 #Recuperar {
@@ -69,12 +72,13 @@ mat-divider{
 }
 
 .stroked{
-  width: 100%;
-  background-color: white;
+  margin: 10 auto;
+  padding: 10px;
 
 }
 .flat{
-  width: 100%;
+  margin: 10 auto;
+  padding: 10px;
 
 }
 
@@ -87,4 +91,6 @@ mat-divider{
 .example-full-width {
   width: 100%;
 }
+
+
 

@@ -1,9 +1,8 @@
+import { Ramos } from './../../_models/ramos';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { inject } from '@angular/core';
-import { Ramos } from 'src/_models/ramos';
 import { MenuController } from '@ionic/angular';
-
 
 @Component({
   selector: 'app-historial',
@@ -20,23 +19,24 @@ export class HistorialPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
 
     this.ramos = [
       {
         sigla: 'ASY4131-003V',
         nombre: 'Arquitectura',
-        asistencias:['Lunes 15/07','Lunes 22/07','Lunes 29/07', 'Lunes 05/08'],
+        asistencias:['Lunes 15/07','Lunes 22/07','Lunes 29/07', 'Lunes 05/08', 'Lunes 12/08'],
         estados:['Presente','Ausente','Presente','Ausente'],
-        totClases:4,
-        clasesAsistidas:2
+        totClases: 0,
+        clasesAsistidas:0
       },
       {
         sigla: 'PGY4121-003V',
         nombre: 'Programación de Aplicaciones Móviles',
-        asistencias:['Martes 16/07','Martes 23/07','Martes 30/07','Martes 06/08'],
+        asistencias:['Martes 16/07','Martes 23/07','Martes 30/07','Martes 06/08','Martes 23/07','Martes 23/07'],
         estados:['Presente','Presente','Presente','Presente'],
-        totClases:4,
-        clasesAsistidas:4
+        totClases:0,
+        clasesAsistidas:0
 
       },
       {
@@ -44,8 +44,8 @@ export class HistorialPage implements OnInit {
         nombre: 'Ingles',
         asistencias:['Lunes 15/07','Miercoles 17/07','Lunes 22/07','Miercoles 24/07'],
         estados:['Presente','Presente','Presente','Justificado'],
-        totClases:4,
-        clasesAsistidas:3
+        totClases:0,
+        clasesAsistidas:0
 
       },
       {
@@ -53,8 +53,8 @@ export class HistorialPage implements OnInit {
         nombre: 'Estadistica Descriptiva',
         asistencias:['Sabado 20/07','Sabado 27/07','Sabado 03/08','Sabado 10/08'],
         estados:['Presente','Presente','Ausente','Presente'],
-        totClases:4,
-        clasesAsistidas:3
+        totClases:0,
+        clasesAsistidas:0
 
       },
       {
@@ -62,8 +62,8 @@ export class HistorialPage implements OnInit {
         nombre: 'Calidad de Software',
         asistencias:['Viernes 19/07','Viernes 26/07','Viernes 02/08','Viernes 09/08'],
         estados:['Presente','Justificado','Presente','Presente'],
-        totClases:4,
-        clasesAsistidas:3
+        totClases:0,
+        clasesAsistidas:0
 
       },
       {
@@ -71,10 +71,22 @@ export class HistorialPage implements OnInit {
         nombre: 'Etica para el Trabajo',
         asistencias:['Sabado 20/07','Sabado 27/07','Sabado 03/08','Sabado 10/08'],
         estados:['Presente','Presente','Ausente','Presente'],
-        totClases:4,
-        clasesAsistidas:3
+        totClases:0,
+        clasesAsistidas:0
       }
     ];
+    this.ramos.forEach(ramo => {
+      ramo.totClases = this.calcularTotalClases(ramo);
+      ramo.clasesAsistidas = this.calcularClasesAsistidas(ramo);
+    });
+    
+  }
+  calcularTotalClases(ramo: Ramos): number {
+    return Number(ramo.asistencias.length.toFixed(2));
+  }
+
+  calcularClasesAsistidas(ramo: Ramos): number {
+    return Number(ramo.estados.filter(estado => estado === 'Presente').length.toFixed(2));
   }
 
   volver() {

@@ -55,7 +55,6 @@ ng add @angular/material -->
     
     </div>
 
-    <p class="ion-text-end" routerLink="/password-recovery">¿Has Olvidado La Contraseña?</p>
 
     <ion-button class="flat" expand="block"  mode="ios"  type="submit" [disabled]="form.invalid"> <!--Estará desactivado si el form tiene errores o campos vacíos-->
       Ingresar
@@ -66,6 +65,8 @@ ng add @angular/material -->
       Registrar
       <ion-icon slot="end" name="person-add-outline" ></ion-icon>
     </ion-button>
+    <p class="ion-text-center" routerLink="/password-recovery">¿Has Olvidado La Contraseña?</p>
+
     </form>
 
     </ion-card>
