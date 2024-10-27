@@ -1,0 +1,139 @@
+<ion-menu menuId="inicioMenu" side="end" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list class="menu-list">
+      <ion-item (click)="closeMenu()" routerLink="/perfil">
+        <ion-label>Perfil</ion-label>
+      </ion-item>
+      <mat-divider></mat-divider>
+      <ion-item (click)="closeMenu()" routerLink="/attendance">
+        <ion-label>Registrar Asistencia</ion-label>
+      </ion-item>
+      <mat-divider></mat-divider>
+      <ion-item (click)="closeMenu()" routerLink="/historial">
+        <ion-label>Historial de asistencia</ion-label>
+      </ion-item>
+      <mat-divider></mat-divider>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start"> </ion-buttons>
+      <ion-title>Inicio</ion-title>
+
+      <ion-buttons slot="end">
+        <ion-menu-button menu="inicioMenu"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-card id="card-perfil">
+      <ion-card-header class="titulo-perfil">
+        <ion-card-title></ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div class="avatar-container">
+          <ion-avatar aria-hidden="true" slot="start">
+            <img alt="" src="assets/imgs/attendance-Logo.png" />
+          </ion-avatar>
+        </div>
+        <h6>¡Bienvenido/a!</h6>
+        <h6>{{user()?.name}}</h6>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card id="card-buttons">
+      <div class="button-container">
+        <ion-button routerLink="/perfil" class="button-card" expand="block">
+          <div class="button-content">Mi Perfil</div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </ion-button>
+
+        <ion-button routerLink="/attendance" class="button-card" expand="block">
+          <div class="button-content">
+            <div>Registrar Asistencia</div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="{1.5}"
+              stroke="currentColor"
+              class="icon"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
+              />
+            </svg>
+          </div>
+        </ion-button>
+
+        <ion-button routerLink="/tareas" class="button-card" expand="block">
+          <div class="button-content">
+            <div>Tareas</div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="{1.5}"
+              stroke="currentColor"
+              class="icon"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6.75 2.994v2.25m10.5-2.25v2.25m-14.252 13.5V7.491a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v11.251m-18 0a2.25 2.25 0 0 0 2.25 2.25h13.5a2.25 2.25 0 0 0 2.25-2.25m-18 0v-7.5a2.25 2.25 0 0 1 2.25-2.25h13.5a2.25 2.25 0 0 1 2.25 2.25v7.5m-6.75-6h2.25m-9 2.25h4.5m.002-2.25h.005v.006H12v-.006Zm-.001 4.5h.006v.006h-.006v-.005Zm-2.25.001h.005v.006H9.75v-.006Zm-2.25 0h.005v.005h-.006v-.005Zm6.75-2.247h.005v.005h-.005v-.005Zm0 2.247h.006v.006h-.006v-.006Zm2.25-2.248h.006V15H16.5v-.005Z"
+              />
+            </svg>
+          </div>
+        </ion-button>
+
+        <ion-button (click)="cerrarSesion()" class="button-card" expand="block">
+          <div class="button-content">
+            <div>Cerrar Sesion</div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="{1.5}"
+              stroke="currentColor"
+              class="icon"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9"
+              />
+            </svg>
+          </div>
+        </ion-button>
+      </div>
+    </ion-card>
+  </ion-content>
+</div>

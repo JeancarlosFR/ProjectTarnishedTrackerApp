@@ -1,0 +1,31 @@
+.menu-list{
+  border-radius: 10px;
+}
+
+ion-content {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ion-card {
+  background-color: rgb(194, 198, 199);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  top: 20%;
+}
+
+.image {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.scan-button {
+  margin-top: 10px;
+  align-self: center;
+}

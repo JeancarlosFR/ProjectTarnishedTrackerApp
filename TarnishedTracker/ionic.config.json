@@ -1,0 +1,7 @@
+{
+  "name": "TarnishedTracker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

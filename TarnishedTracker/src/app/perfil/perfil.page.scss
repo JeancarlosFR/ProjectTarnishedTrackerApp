@@ -1,0 +1,85 @@
+#card-perfil {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+ion-avatar{
+    width: 100px;
+    height: 100px;
+}
+
+.avatar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.titulo-perfil{
+    text-align: center;
+}
+
+.stroked{
+    font-size: 14px;
+    width: 50%;
+  
+}
+
+.flat{
+    width: 50%;
+    margin-top: 10px;
+}
+
+
+.botones-perfil{
+    text-align: center;
+}
+
+.lista-perfil {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 500px; 
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+p{
+    margin-left: 5%;
+}
+
+.icon-square {
+    width: 20px;  /* Ajusta el tamaño del cuadrado */
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;  /* Borde redondeado */
+    margin-right: 5px;
+  }
+  
+ 
+
+  .icon-square svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--icon-color, #333); /* Por defecto para tema claro */
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .icon-square svg {
+      stroke: #fff; /* Color blanco para tema oscuro */
+    }
+  }
+
+  ion-menu-button {
+    z-index: 10;
+    pointer-events: auto;
+  }
+
+.menu-list{
+    border-radius: 10px;
+}

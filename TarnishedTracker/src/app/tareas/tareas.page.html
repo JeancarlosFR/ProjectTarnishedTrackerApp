@@ -1,0 +1,95 @@
+
+<ion-menu menuId="tareasMenu" side="end" contentId="tareas-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Registro Asistencia</ion-title>
+      
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list class="menu-list">
+      <ion-item (click)="closeMenu()" routerLink="/inicio">
+        <ion-label>Inicio</ion-label>
+      </ion-item>
+      <mat-divider></mat-divider>
+      <ion-item (click)="closeMenu()" routerLink="/perfil">
+        <ion-label>Perfil</ion-label>
+      </ion-item>
+      <mat-divider></mat-divider>
+      <ion-item (click)="closeMenu()" routerLink="/historial">
+        <ion-label>Historial de asistencia</ion-label>
+      </ion-item>
+      <mat-divider></mat-divider>
+      </ion-list>
+</ion-content>
+</ion-menu>
+<div class="ion-page" id="tareas-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Registro Asistencia</ion-title>
+      <ion-buttons slot="end">
+        <ion-menu-button menu="tareasMenu"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+
+  @for (item of todoList;track $index){
+    <ion-card color="blue" class="ion-margin">
+      <!--Se incorpora nombre de asignatura-->
+      <ion-card-header>
+        <ion-card-subtitle>
+          {{ item.nombreItem }}
+        </ion-card-subtitle>
+      <!--Se icono y categoría | se da condición con *ngIf dependiendo de la prioridad-->
+        <ion-item color="blue">
+          <ion-icon *ngIf="item.prioridadItem === 'Alta'" color="danger" size="small" name="ellipse"></ion-icon>
+          <ion-icon *ngIf="item.prioridadItem === 'Media'" color="warning" size="small" name="ellipse"></ion-icon>
+          <ion-icon *ngIf="item.prioridadItem === 'Baja'" color="success" size="small" name="ellipse"></ion-icon>
+          <ion-label>{{item.categoriaItem}}</ion-label>
+        </ion-item>
+  
+      </ion-card-header>
+    <!--Se incorpora Fecha -->
+      <ion-card-content color="blue">
+        <ion-label>
+          Fecha: {{item.fechaItem | date: 'fullDate'}}
+        </ion-label>
+      </ion-card-content>
+  
+      <ion-row color="blue">
+  
+        <ion-item color="blue">
+          <ion-icon name="share-outline"></ion-icon>
+          <p>Compartir</p>
+        </ion-item>
+  
+        <ion-item color="blue">
+          <ion-icon name="checkmark-outline"></ion-icon>
+          <p>Completar</p>
+        </ion-item>
+  
+        <ion-item color="blue" button (click)="delete($index)">
+          <ion-icon name="trash-outline"></ion-icon>
+          <p>Borrar</p>
+        </ion-item>
+        
+      </ion-row>
+
+    </ion-card>
+  }
+  
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="agregarTareas()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+
+
+</ion-content>

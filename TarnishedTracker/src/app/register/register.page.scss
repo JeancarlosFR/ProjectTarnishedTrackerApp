@@ -1,0 +1,79 @@
+ion-content {
+  
+  
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+  }
+
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    margin: auto;
+    background-color: light;
+    border-radius: 12px;
+  }
+
+
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;  // Espacio entre el logo y la card
+  
+    img {
+      width: 100px;   // Ajusta este valor para el tamaño deseado
+      height: auto;   // Mantiene la proporción de la imagen
+      max-width: 100%;  // Asegura que no se salga del contenedor
+    }
+  }
+  
+
+  mat-form-field {
+    width: 100%;
+    display: flex;
+    max-width: 100%;
+    margin-bottom: 5px;
+    
+
+    .mat-form-field-outline {
+      border-color: #fff; // Color blanco para las líneas de los inputs
+    }
+
+    .mat-form-field-label {
+      color: #fff; // Color blanco para las etiquetas
+    }
+
+    input, mat-select {
+      color: black; 
+    }
+
+     
+    
+  }
+
+  .custom-button {
+    background-color: rgb(24, 119, 242);
+    color: white;
+    width: 100%;
+    padding: 1rem; 
+  }
+  
+
+}
+
+
+
+
+  
+  
+  
+
+ 
+

@@ -1,0 +1,61 @@
+
+
+<ion-menu menuId="scannerMenu" side="end" contentId="scanner-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list class="menu-list">
+      <ion-item (click)="closeMenu()" routerLink="/inicio">
+        <ion-label>Inicio</ion-label>
+      </ion-item>
+      <mat-divider></mat-divider>
+      <ion-item (click)="closeMenu()" routerLink="/perfil">
+        <ion-label>Perfil</ion-label>
+      </ion-item>
+      <mat-divider></mat-divider>
+      <ion-item (click)="closeMenu()" routerLink="/historial">
+        <ion-label>Historial de asistencia</ion-label>
+      </ion-item>
+      <mat-divider></mat-divider>
+      </ion-list>
+</ion-content>
+</ion-menu>
+
+<div id="scanner-content">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Scanner</ion-title>
+      <ion-buttons slot="end">
+        <ion-menu-button menu="scannerMenu"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+</div>
+
+<ion-content>
+  <ion-card class="ion-card">
+    <img class="image" src="./assets/imgs/QR_code_f.png" alt="">
+    <ion-card-content>
+      <ion-button (click)="starScan()" expand="block" class="submit">Escanea tu código
+        <ion-icon slot="end" name="scan-outline"></ion-icon>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+  
+  
+</ion-content>
+
+
+
+
+
+
+

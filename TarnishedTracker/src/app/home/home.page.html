@@ -1,0 +1,76 @@
+<!--
+Instalaciones Para correr el proyecto
+npm install rxjs
+npm install 
+ng add @angular/material -->
+
+
+<ion-header>
+  <ion-toolbar>
+    
+    <ion-title>
+      TarnishedTracker
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content >
+<div id="container" class="d-flex-center">
+
+    <!--SE IMPORTA COMPONENTE LOGO-->
+
+    <div class="logo-container">
+      <app-logo></app-logo>
+    </div>
+  <ion-card class="card-container">
+    
+    <!--EVENTO NGSUBMIT PARA LLAMAR LA FUNCIÓN Y ENVIAR EL FORMULARIO-->
+    <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()"><!--evento keypress.enter para realizar el envío apretando tecla enter-->
+
+    <!--INPUT DEL CORREO-->
+    <app-input-custom icon="mail-outline"
+    autocomplete="email"
+    [control]="form.controls.email"
+    type="email"
+    label="correo"></app-input-custom>
+
+    <!--VALIDADORES DEL CORREO SOLO SE MOSTRARÁ SI EL EMAIL TIENE ERRORES Y SI ES TOCADO DE ESTA MANERA MOSTRARÁ LOS ERRORES -->
+    <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
+      <!--ERRORES-->
+      <div *ngIf="form.controls.email.errors?.['required']">Correo obligatorio</div>
+      <div *ngIf="form.controls.email.errors?.['email']">Correo invalido</div>
+    </div>
+
+    <!--INPUT DEL PASSWORD-->
+    <app-input-custom icon="lock-closed-outline"
+    [control]="form.controls.password"
+    type="password"
+    label="contraseña"></app-input-custom>
+
+    <!--VALIDADORES DEL PASSWPRD SOLO SE MOSTRARÁ SI EL PASSWORD TIENE ERRORES Y SI ES TOCADO DE ESTA MANERA MOSTRARÁ LOS ERRORES -->
+     <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.touched">
+      <!--ERRORES-->
+      <div *ngIf="form.controls.password.errors?.['required']">Contraseña obligatoria</div>
+    
+    </div>
+
+    <p class="ion-text-end" routerLink="/password-recovery">¿Has Olvidado La Contraseña?</p>
+
+    <ion-button class="flat" expand="block"  mode="ios"  type="submit" [disabled]="form.invalid"> <!--Estará desactivado si el form tiene errores o campos vacíos-->
+      Ingresar
+      <ion-icon slot="end" name="log-in-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button class="stroked"   expand="block"  mode="ios"  fill="outline" routerLink="/register">
+      Registrar
+      <ion-icon slot="end" name="person-add-outline" ></ion-icon>
+    </ion-button>
+    </form>
+
+    </ion-card>
+
+</div>
+
+
+</ion-content>

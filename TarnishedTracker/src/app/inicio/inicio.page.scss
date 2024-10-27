@@ -1,0 +1,85 @@
+// Card PRESENTACIÓN
+#card-perfil {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 20px;
+  margin-top: 80px;
+  margin-bottom: 10px;
+}
+
+ion-avatar{
+  width: 100px;
+  height: 100px;
+}
+
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+//Card de botones
+#card-buttons{
+
+  margin: 0 auto;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 20px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+
+}
+
+// CONFIG BOTONES
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  gap: 10px; 
+  padding: 20px;
+}
+
+//Style botones
+.button-card {
+  --background: rgb(24, 119, 242);
+  border-radius: 10px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  flex: 1 1 45%; 
+  max-width: 200px; 
+  min-width: 140px; 
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  color: white;
+}
+
+.icon{
+
+  width: 30px; 
+  height: 30px;
+  color: white; 
+  stroke-width: 1.5;
+}
+
+
+
+//Responsivo para pantallas mas grandes
+@media (min-width: 768px) {
+  .button-container {
+    max-width: 600px; //limite de ancho
+    margin: 0 auto; //centrar contenedor
+  }
+}
+
+.menu-list{
+  border-radius: 10px;
+}

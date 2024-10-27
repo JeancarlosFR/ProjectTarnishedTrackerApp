@@ -1,0 +1,19 @@
+<ion-item class="custom-input" lines="none">
+  <ion-icon color="primary" *ngIf="icon" slot="start" [name]="icon"></ion-icon>
+
+  <ion-input [type]="type"
+  [autocomplete]="autocomplete"
+  [label]="label"
+  [formControl]="control"
+  label-placement="floating"></ion-input>
+
+  <!--BOTON OJITO-->
+  <!--El Boton del ojito solo se mostrará en el input que sea tipo password-->
+  <ion-button *ngIf="isPassword" (click)="showOrHidePassword()" slot="end" fill="clear" shape="round">
+    <!--hide? (si hide es igual a true se mostrará eye-outline sino: se moestrará eye-off-outline )-->
+    <ion-icon  slot="icon-only" [name]="hide ?  'eye-outline' : 'eye-off-outline' "></ion-icon>
+  </ion-button>
+
+
+
+</ion-item>
