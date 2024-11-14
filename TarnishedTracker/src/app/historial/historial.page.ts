@@ -1,4 +1,4 @@
-import { Ramos } from './../../_models/ramos';
+import { Asistencias } from '../../_models/asistencias';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { inject } from '@angular/core';
@@ -14,14 +14,14 @@ export class HistorialPage implements OnInit {
   NavController = inject(NavController);
   menuCtrl = inject(MenuController);
 
-  ramos: Ramos[] = [];
+  asistencias: Asistencias[] = [];
 
   constructor() { }
 
   ngOnInit() {
     
 
-    this.ramos = [
+    this.asistencias = [
       {
         sigla: 'ASY4131-003V',
         nombre: 'Arquitectura',
@@ -75,18 +75,18 @@ export class HistorialPage implements OnInit {
         clasesAsistidas:0
       }
     ];
-    this.ramos.forEach(ramo => {
-      ramo.totClases = this.calcularTotalClases(ramo);
-      ramo.clasesAsistidas = this.calcularClasesAsistidas(ramo);
+    this.asistencias.forEach(asistencias => {
+      asistencias.totClases = this.calcularTotalClases(asistencias);
+      asistencias.clasesAsistidas = this.calcularClasesAsistidas(asistencias);
     });
     
   }
-  calcularTotalClases(ramo: Ramos): number {
-    return Number(ramo.asistencias.length.toFixed(2));
+  calcularTotalClases(asistencias: Asistencias): number {
+    return Number(asistencias.asistencias.length.toFixed(2));
   }
 
-  calcularClasesAsistidas(ramo: Ramos): number {
-    return Number(ramo.estados.filter(estado => estado === 'Presente').length.toFixed(2));
+  calcularClasesAsistidas(asistencias: Asistencias): number {
+    return Number(asistencias.estados.filter(estado => estado === 'Presente').length.toFixed(2));
   }
 
   volver() {
