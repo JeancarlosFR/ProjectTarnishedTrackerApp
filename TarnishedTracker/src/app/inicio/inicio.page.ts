@@ -26,9 +26,6 @@ export class InicioPage  {
 
   constructor() {}
 
-  
-  
-
   async cerrarSesion() {
     const load = await this.loadSrv.create({
       message: 'Cerrando Sesión',

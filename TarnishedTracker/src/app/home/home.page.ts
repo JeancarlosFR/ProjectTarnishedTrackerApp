@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
-import { lastValueFrom, timer } from 'rxjs';
 import { LoadingController } from '@ionic/angular';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { FirebaseService } from 'src/services/firebase.service';

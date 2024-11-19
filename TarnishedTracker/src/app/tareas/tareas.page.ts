@@ -30,50 +30,6 @@ export class TareasPage implements OnInit {
 
   todoList: Tarea[] = [];
 
-  
-  /*[{
-    //ITEM 1
-    name: 'Desarrollo de App Moviles',
-    date: '09-08-2024',
-    priority: 'Alta',
-    category: 'Evaluación 1'
-
-
-  },
-  {
-    //ITEM 2
-    name: 'Calidad de software',
-    date: '09-25-2024',
-    priority: 'Baja',
-    category: 'Charla'
-
-
-
-
-
-  },
-  {
-    //ITEM 3
-    name: 'Etica',
-    date: '09-25-2024',
-    priority: 'Media',
-    category: 'Evaluación 1'
-
-  },
-  {
-    //ITEM 4
-    name: 'Ingles',
-    date: '09-26-2024',
-    priority: 'Baja',
-    category: 'Quiz 1'
-
-  }
-
-
-
-]
- */ 
-  //Se almacena la fecha actual que tenemos
   fechaActual : number = Date.now();
 
   constructor(public modalCtrl: ModalController) { }
