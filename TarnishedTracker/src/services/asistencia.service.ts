@@ -1,20 +1,25 @@
 import { HttpClient } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import { FirebaseService } from './firebase.service';
 import { lastValueFrom } from 'rxjs';
 import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root', // Indica que el servicio es accesible en toda la aplicación.
+  providedIn: 'root', 
 })
 export class AsistenciaService {
+
+  toastCtrl = inject(ToastController);
+
  
   private qrData = new Subject<any>();
   qrData$ = this.qrData.asObservable();
 
   constructor(
-    private http: HttpClient, // Inyección del cliente HTTP para hacer solicitudes a la API.
-    private firebaseService: FirebaseService // Servicio de Firebase para obtener el token de autenticación.
+    private http: HttpClient,
+    private firebaseService: FirebaseService 
   ) 
   {}
 
@@ -37,7 +42,7 @@ export class AsistenciaService {
     return lastValueFrom(obs);
   }
 
-  async obtenerAsistencia() {
+  async obtenerListaAsistencia() {
     const idToken = await this.firebaseService
       .getAuth()
       .currentUser?.getIdToken();
@@ -54,22 +59,51 @@ export class AsistenciaService {
     return lastValueFrom(obs);
   }
 
-  // async obtenerQR () {
-  //   const idToken = await this.firebaseService
-  //     .getAuth()
-  //     .currentUser?.getIdToken();
-
-  //   const obs = this.http.get(
-  //     'https://pgy4121serverlessapi.vercel.app/api/asistencia/qr?seccion=PruebaJeanyEdrian',
-  //     {
-  //       headers: {
-  //         Authorization: 'Bearer ' + idToken,
-  //         accept: 'text/html'
-  //       },
-  //     }
-  //   );
-  //   console.log(obs);
-  //   return lastValueFrom(obs);
-  // }
+  async registrarAsistencia(datosQR: any) {
+    try {
+      const idToken = await this.firebaseService
+        .getAuth()
+        .currentUser?.getIdToken();
+  
+      const obs = this.http.post(
+        'https://pgy4121serverlessapi.vercel.app/api/asistencia/qr',
+        datosQR, // Datos que se enviarán en el cuerpo de la solicitud
+        {
+          headers: {
+            Authorization: 'Bearer ' + idToken, 
+          },
+        }
+      );
+  
+      const response = await lastValueFrom(obs);
+      console.log('Asistencia registrada:', response);
+      return response;
+    } catch (error: any) {
+      // Verifica si el error tiene un código de estado 400
+      if (error.status === 400) {
+        const toast = await this.toastCtrl.create({
+          message: 'Alumno ya asistido',
+          duration: 2000,
+          position: 'bottom',
+          color: 'medium',
+        });
+        toast.present();
+        console.warn('Alumno ya asistió:', error.error?.message || 'Error 400');
+        return { status: 400, message: 'Alumno ya asistido' };
+      } else {
+        
+        const toast = await this.toastCtrl.create({
+          message: 'Error al registrar asistencia',
+          duration: 2000,
+          position: 'bottom',
+          color: 'medium',
+        });
+        toast.present();
+        console.error('Error al registrar asistencia:', error);
+        throw new Error(error.error?.message || 'Error al registrar asistencia');
+      }
+    }
+  }
+  
 
 }

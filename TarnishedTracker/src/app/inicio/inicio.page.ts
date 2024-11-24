@@ -69,8 +69,6 @@ export class InicioPage  {
     });
   }
 
-
-
   volver() {
     this.NavController.back();
   }

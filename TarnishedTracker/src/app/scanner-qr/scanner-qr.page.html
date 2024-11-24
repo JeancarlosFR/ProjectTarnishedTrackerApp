@@ -42,7 +42,7 @@
   <ion-card class="ion-card">
     <img class="image" src="./assets/imgs/scan-qr.webp" alt="Código QR" />
     <ion-card-content>
-      <ion-button (click)="startScan()" expand="block" class="submit">
+      <ion-button  (click)="startScan() " expand="block" class="submit">
         Escanea tu código
         <ion-icon slot="end" name="scan-outline"></ion-icon>
       </ion-button>
@@ -57,7 +57,7 @@
           <ion-label>Sección: {{seccion}}</ion-label>
         </ion-item>
         <ion-item >
-          <ion-label>Codigo: {{codigoSeccion}}</ion-label>
+          <ion-label>Codigo: {{code}}</ion-label>
         </ion-item>
         <ion-item >
           <ion-label>Fecha: {{fecha}}</ion-label>
