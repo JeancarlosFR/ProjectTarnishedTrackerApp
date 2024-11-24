@@ -30,10 +30,3 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
   
 })
 export class AppModule {}
-
-
-
-
-
-
-

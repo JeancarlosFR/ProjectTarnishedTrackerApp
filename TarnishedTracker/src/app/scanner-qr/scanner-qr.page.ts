@@ -31,7 +31,8 @@ export class ScannerQrPage implements OnInit {
       await BarcodeScanner.removeAllListeners(); // Remueve cualquier listener previo del escáner.
     }
     try {
-      this.datos = await this.asistenciaService.obtenerDatos();
+      this.datos = await this.asistenciaService.obtenerAsistencia();
+      console.log(this.asistenciaService.obtenerAsistencia());
       console.log(this.asistenciaService.obtenerDatos());
     } catch (error: any) {
       console.log(error);

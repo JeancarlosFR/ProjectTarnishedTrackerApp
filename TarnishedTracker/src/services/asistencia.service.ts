@@ -8,8 +8,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root', // Indica que el servicio es accesible en toda la aplicación.
 })
 export class AsistenciaService {
-  // URL de la API para registrar la asistencia (debe ser reemplazada por la URL real de tu API).
-  private apiUrl = 'https://pgy4121serverlessapi.vercel.app/api/cuenta';
+ 
   private qrData = new Subject<any>();
   qrData$ = this.qrData.asObservable();
 
@@ -37,5 +36,40 @@ export class AsistenciaService {
     console.log(idToken);
     return lastValueFrom(obs);
   }
+
+  async obtenerAsistencia() {
+    const idToken = await this.firebaseService
+      .getAuth()
+      .currentUser?.getIdToken();
+
+    const obs = this.http.get(
+      'https://pgy4121serverlessapi.vercel.app/api/asistencia/listar',
+      {
+        headers: {
+          Authorization: 'Bearer ' + idToken,
+        },
+      }
+    );
+    console.log(obs);
+    return lastValueFrom(obs);
+  }
+
+  // async obtenerQR () {
+  //   const idToken = await this.firebaseService
+  //     .getAuth()
+  //     .currentUser?.getIdToken();
+
+  //   const obs = this.http.get(
+  //     'https://pgy4121serverlessapi.vercel.app/api/asistencia/qr?seccion=PruebaJeanyEdrian',
+  //     {
+  //       headers: {
+  //         Authorization: 'Bearer ' + idToken,
+  //         accept: 'text/html'
+  //       },
+  //     }
+  //   );
+  //   console.log(obs);
+  //   return lastValueFrom(obs);
+  // }
 
 }
