@@ -1,8 +1,6 @@
-export interface Asistencias{
-    sigla:string;
-    nombre:string;
-    asistencias:string[];
-    estados:string[];
-    totClases:number;
-    clasesAsistidas:number;
-}
+export interface Asistencias {
+    fecha: number;
+    asistido: boolean;
+  }
+  
+ 

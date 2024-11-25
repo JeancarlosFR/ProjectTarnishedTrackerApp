@@ -14,8 +14,7 @@ export class AsistenciaService {
   toastCtrl = inject(ToastController);
 
  
-  private qrData = new Subject<any>();
-  qrData$ = this.qrData.asObservable();
+  
 
   constructor(
     private http: HttpClient,
@@ -42,12 +41,12 @@ export class AsistenciaService {
     return lastValueFrom(obs);
   }
 
-  async obtenerListaAsistencia() {
+  async obtenerListaAsistencia <T>() {
     const idToken = await this.firebaseService
       .getAuth()
       .currentUser?.getIdToken();
 
-    const obs = this.http.get(
+    const obs = this.http.get<T>(
       'https://pgy4121serverlessapi.vercel.app/api/asistencia/listar',
       {
         headers: {
@@ -58,6 +57,10 @@ export class AsistenciaService {
     console.log(obs);
     return lastValueFrom(obs);
   }
+
+
+
+
 
   async registrarAsistencia(datosQR: any) {
     try {
@@ -90,7 +93,19 @@ export class AsistenciaService {
         toast.present();
         console.warn('Alumno ya asistió:', error.error?.message || 'Error 400');
         return { status: 400, message: 'Alumno ya asistido' };
-      } else {
+      }
+      if (error.status === 404) {
+        const toast = await this.toastCtrl.create({
+          message: 'El Codigo QR ha caducado',
+          duration: 2000,
+          position: 'bottom',
+          color: 'medium',
+        });
+        toast.present();
+        console.warn('Codigo QR Caducado', error.error?.message || 'Error 404');
+        return { status: 400, message: 'Codigo QR Caducado' };
+      }
+      else {
         
         const toast = await this.toastCtrl.create({
           message: 'Error al registrar asistencia',
@@ -104,6 +119,8 @@ export class AsistenciaService {
       }
     }
   }
+
+  
   
 
 }

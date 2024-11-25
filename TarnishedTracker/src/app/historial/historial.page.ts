@@ -1,8 +1,10 @@
-import { Asistencias } from '../../_models/asistencias';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Seccion } from 'src/_models/seccion';
+import { historialAsistencias } from 'src/_models/historialAsistencia';
 import { inject } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { AsistenciaService } from 'src/services/asistencia.service';
 
 @Component({
   selector: 'app-historial',
@@ -13,80 +15,54 @@ export class HistorialPage implements OnInit {
 
   NavController = inject(NavController);
   menuCtrl = inject(MenuController);
+  asistenciaService = inject(AsistenciaService);
 
-  asistencias: Asistencias[] = [];
+  Historial: historialAsistencias[] = [];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-    
-
-    this.asistencias = [
-      {
-        sigla: 'ASY4131-003V',
-        nombre: 'Arquitectura',
-        asistencias:[],
-        estados:[],
-        totClases: 0,
-        clasesAsistidas:0
-      },
-      {
-        sigla: 'PGY4121-003V',
-        nombre: 'Programación de Aplicaciones Móviles',
-        asistencias:[],
-        estados:[],
-        totClases:0,
-        clasesAsistidas:0
-
-      },
-      {
-        sigla: 'INI5111-005V',
-        nombre: 'Ingles',
-        asistencias:[],
-        estados:[],
-        totClases:0,
-        clasesAsistidas:0
-
-      },
-      {
-        sigla: 'MAT4140-003V',
-        nombre: 'Estadistica Descriptiva',
-        asistencias:[],
-        estados:[],
-        totClases:0,
-        clasesAsistidas:0
-
-      },
-      {
-        sigla: 'CSY4111-003V',
-        nombre: 'Calidad de Software',
-        asistencias:[],
-        estados:[],
-        totClases:0,
-        clasesAsistidas:0
-
-      },
-      {
-        sigla: 'EAY4450-003V',
-        nombre: 'Etica para el Trabajo',
-        asistencias:[],
-        estados:[],
-        totClases:0,
-        clasesAsistidas:0
-      }
-    ];
-    this.asistencias.forEach(asistencias => {
-      asistencias.totClases = this.calcularTotalClases(asistencias);
-      asistencias.clasesAsistidas = this.calcularClasesAsistidas(asistencias);
-    });
-    
-  }
-  calcularTotalClases(asistencias: Asistencias): number {
-    return Number(asistencias.asistencias.length.toFixed(2));
+  async ngOnInit() {
+    // Se ejecuta la primera vez que el componente se inicializa.
+    await this.listarAsistencia();
   }
 
-  calcularClasesAsistidas(asistencias: Asistencias): number {
-    return Number(asistencias.estados.filter(estado => estado === 'Presente').length.toFixed(2));
+  async ionViewWillEnter() {
+    // Se ejecuta cada vez que la página es visible.
+    await this.listarAsistencia();
+  }
+
+  async listarAsistencia() {
+    try {
+      const lista = await this.asistenciaService.obtenerListaAsistencia<Seccion[]>();
+      
+      // Crear un mapeo entre secciones y nombres
+      const seccionNombreMap: { [key: string]: string } = {
+        'PDY12586': 'Programacion De Aplicaciones Moviles',
+        'PDY13548': 'Ingles',
+        'PDY14534': 'Arquitectura',
+        'PDY15487': 'Calidad de Software',
+        'PDY16487': 'Etica Para el Trabajo',
+        'PDY17487': 'Estadistica Descriptiva',
+      };
+  
+      // Filtrar secciones válidas
+      const filtrarSecciones = lista.filter(seccion => Object.keys(seccionNombreMap).includes(seccion.seccion));
+  
+      this.Historial = [];
+      filtrarSecciones.forEach(seccion => {
+        seccion.asistencia.forEach(asistencia => {
+          this.Historial.push({
+            seccion: seccion.seccion,
+            asistencia: asistencia.asistido,
+            fecha: asistencia.fecha
+          });
+        });
+      });
+  
+      console.log(this.Historial);
+    } catch (error) {
+      console.error('Error fetching asistencia:', error);
+    }
   }
 
   volver() {
@@ -96,5 +72,4 @@ export class HistorialPage implements OnInit {
   closeMenu() {
     this.menuCtrl.close();
   }
-
 }

@@ -37,25 +37,23 @@
       <ion-content [fullscreen]="true">
   
         <ion-card>
-          @for (asistencia of asistencias; track $index) {
+          @for (asistencia of Historial; track $index) {
           <ion-accordion-group>
             <ion-accordion value="first" >
                 <ion-item slot="header" color="blue">
-                  <ion-label id="nombreRamo">{{asistencia.nombre}}<ion-label id="sigla">{{asistencia.sigla}}</ion-label> <ion-label id="asistencia">{{(asistencia.clasesAsistidas/asistencia.totClases)*100}}%({{asistencia.clasesAsistidas}} de {{asistencia.totClases}} clases)</ion-label>  </ion-label>
+                  
+                  <ion-label id="nombreRamo"> {{asistencia.seccion}} </ion-label>  
                 </ion-item>
                 <div class="ion-padding" slot="content">
                   <ion-grid>
                     <ion-row>
                       <ion-col>Fecha <br>
-                        @for (asistencia of asistencia.asistencias; track $index) { 
-                          <ion-label>{{asistencia}} <br> </ion-label>
-                        } 
+                        
+                          <ion-label>{{asistencia.fecha}} <br> </ion-label>
+                        
                       </ion-col>
                       <ion-col>Asistencia <br>
-                        
-                          @for (estado of asistencia.estados; track $index) { 
-                            <ion-label>{{estado}} <br> </ion-label>
-                          } 
+                          <ion-label>{{asistencia.asistencia}} <br> </ion-label>  
                         </ion-col>    
                     </ion-row>
                      
@@ -65,7 +63,6 @@
             </ion-accordion-group>
           }
         </ion-card>
-        
       </ion-content>
     </div>
   

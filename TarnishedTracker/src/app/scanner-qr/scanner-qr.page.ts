@@ -97,7 +97,6 @@ export class ScannerQrPage implements OnInit {
                 const response = await this.asistenciaService.registrarAsistencia(datosQR);
                 
                 console.log('Respuesta de la API:', response);
-                
             } catch (response) {
               
             }
