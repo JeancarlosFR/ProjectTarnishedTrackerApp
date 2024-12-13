@@ -66,14 +66,27 @@ export class ScannerQrPage implements OnInit {
       const { data } = await modal.onWillDismiss();
 
       if (data) {
+        try {
+          
         this.ScanResult = data?.barcode?.displayValue;
 
           const datosQR = JSON.parse(this.ScanResult);
           this.seccion = datosQR.seccion;
           this.code = datosQR.code;
           this.fecha = datosQR.fecha;
-        
+          
+          
+          const response = await this.asistenciaService.registrarAsistencia(datosQR);  
+          
+          console.log('Respuesta de la API:', response);
+
+      } catch (response) {
+          
       }
+    } else {
+      console.error('No se detectó ningún código QR en la imagen.');
+    };
+
     } else {
       // Cargar una imagen en navegadores web
       const input = document.createElement('input');
@@ -95,8 +108,8 @@ export class ScannerQrPage implements OnInit {
 
                 // Llamar a registrarAsistencia con los datos
                 const response = await this.asistenciaService.registrarAsistencia(datosQR);
-                
                 console.log('Respuesta de la API:', response);
+                 
             } catch (response) {
               
             }

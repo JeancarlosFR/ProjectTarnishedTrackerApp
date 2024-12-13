@@ -37,31 +37,36 @@
       <ion-content [fullscreen]="true">
   
         <ion-card>
-          @for (asistencia of Historial; track $index) {
+          <!--@for (asistencia of Historial; track $index) {-->
           <ion-accordion-group>
-            <ion-accordion value="first" >
+            <ion-accordion *ngFor="let seccion of Seccion" [value]="seccion.seccion" >
                 <ion-item slot="header" color="blue">
-                  
-                  <ion-label id="nombreRamo"> {{asistencia.seccion}} </ion-label>  
+                <ion-label id="nombreRamo"> {{seccion.nombre}}-{{seccion.seccion}} </ion-label>  
+
                 </ion-item>
                 <div class="ion-padding" slot="content">
                   <ion-grid>
                     <ion-row>
-                      <ion-col>Fecha <br>
-                        
-                          <ion-label>{{asistencia.fecha}} <br> </ion-label>
-                        
+                      <ion-col> <br>           
+                          <ion-label>Fecha <br> </ion-label>
                       </ion-col>
-                      <ion-col>Asistencia <br>
-                          <ion-label>{{asistencia.asistencia}} <br> </ion-label>  
+                      <ion-col><br>
+                          <ion-label>Asistido <br> </ion-label>  
+                        </ion-col>
+                    </ion-row>
+                    <ion-row *ngFor="let asistencia of seccion.asistencia">
+                      <ion-col> <br>           
+                          <ion-label>{{asistencia.fecha}} <br> </ion-label>
+                      </ion-col>
+                      <ion-col><br>
+                          <ion-label>{{asistencia.asistido}} <br> </ion-label>  
                         </ion-col>    
                     </ion-row>
-                     
               </ion-grid>
               </div>  
               </ion-accordion>   
             </ion-accordion-group>
-          }
+          <!--}-->
         </ion-card>
       </ion-content>
     </div>

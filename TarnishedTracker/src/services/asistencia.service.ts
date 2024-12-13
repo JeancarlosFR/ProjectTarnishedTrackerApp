@@ -79,7 +79,14 @@ export class AsistenciaService {
       );
   
       const response = await lastValueFrom(obs);
-      console.log('Asistencia registrada:', response);
+      const toast = await this.toastCtrl.create({
+        message: 'Asistencia registrada con exito',
+        duration: 2000,
+        position: 'bottom',
+        color: 'medium',});
+      toast.present();
+        
+
       return response;
     } catch (error: any) {
       // Verifica si el error tiene un código de estado 400
@@ -97,6 +104,17 @@ export class AsistenciaService {
       if (error.status === 404) {
         const toast = await this.toastCtrl.create({
           message: 'El Codigo QR ha caducado',
+          duration: 2000,
+          position: 'bottom',
+          color: 'medium',
+        });
+        toast.present();
+        console.warn('Codigo QR Caducado', error.error?.message || 'Error 404');
+        return { status: 400, message: 'Codigo QR Caducado' };
+      }
+      if (error.status === 401) {
+        const toast = await this.toastCtrl.create({
+          message: 'Error: Usuario no autorizado',
           duration: 2000,
           position: 'bottom',
           color: 'medium',

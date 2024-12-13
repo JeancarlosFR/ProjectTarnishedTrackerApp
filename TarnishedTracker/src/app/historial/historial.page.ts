@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Seccion } from 'src/_models/seccion';
-import { historialAsistencias } from 'src/_models/historialAsistencia';
 import { inject } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { AsistenciaService } from 'src/services/asistencia.service';
 
@@ -14,16 +14,26 @@ import { AsistenciaService } from 'src/services/asistencia.service';
 export class HistorialPage implements OnInit {
 
   NavController = inject(NavController);
+  loadSrv = inject(LoadingController);
   menuCtrl = inject(MenuController);
   asistenciaService = inject(AsistenciaService);
 
-  Historial: historialAsistencias[] = [];
+  Seccion: Seccion[] = [];
 
   constructor() {}
 
   async ngOnInit() {
+    const load = await this.loadSrv.create({
+      message: 'Cargando Asistencia',
+      duration: 3000,
+    });
+    await load.present();
+
     // Se ejecuta la primera vez que el componente se inicializa.
+
     await this.listarAsistencia();
+    await load.dismiss();
+
   }
 
   async ionViewWillEnter() {
@@ -34,7 +44,7 @@ export class HistorialPage implements OnInit {
   async listarAsistencia() {
     try {
       const lista = await this.asistenciaService.obtenerListaAsistencia<Seccion[]>();
-      
+  
       // Crear un mapeo entre secciones y nombres
       const seccionNombreMap: { [key: string]: string } = {
         'PDY12586': 'Programacion De Aplicaciones Moviles',
@@ -48,22 +58,33 @@ export class HistorialPage implements OnInit {
       // Filtrar secciones válidas
       const filtrarSecciones = lista.filter(seccion => Object.keys(seccionNombreMap).includes(seccion.seccion));
   
-      this.Historial = [];
+      this.Seccion = [];
+  
       filtrarSecciones.forEach(seccion => {
         seccion.asistencia.forEach(asistencia => {
-          this.Historial.push({
-            seccion: seccion.seccion,
-            asistencia: asistencia.asistido,
-            fecha: asistencia.fecha
-          });
+          // Buscar si la sección ya existe en this.Seccion
+          const existingSection = this.Seccion.find(s => s.seccion === seccion.seccion);
+  
+          if (existingSection) {
+            // Agregar la asistencia a la sección existente
+            existingSection.asistencia.push(asistencia);
+          } else {
+            // Crear una nueva sección si no existe
+            this.Seccion.push({
+              nombre: seccionNombreMap[seccion.seccion],
+              seccion: seccion.seccion,
+              asistencia: [asistencia], // Crear un nuevo arreglo con la primera asistencia
+            });
+          }
         });
       });
   
-      console.log(this.Historial);
+      console.log(this.Seccion);
     } catch (error) {
       console.error('Error fetching asistencia:', error);
     }
   }
+  
 
   volver() {
     this.NavController.back();
